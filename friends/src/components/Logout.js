@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {Link} from "react-router-dom";
 const Logout = (props) => {
 
     const logout = event => {
@@ -11,7 +12,7 @@ const Logout = (props) => {
 
     return (
 
-        <button onClick={logout}> Logout </button>
+        <button onClick={logout}><Link to='/login'> Logout </Link></button>
     )
 }
 export default Logout;
