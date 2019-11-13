@@ -2,6 +2,11 @@ import {
     FETCH_FRIENDS_START,
     FETCH_FRIENDS_SUCCESS,
     FETCH_FRIENDS_FAIL,
+
+    FRIEND_BY_ID_START,
+    FRIEND_BY_ID_SUCCESS,
+    FRIEND_BY_ID_FAIL,
+
     ADD_FRIEND_START,
     ADD_FRIEND_SUCCESS,
     ADD_FRIEND_FAIL,
@@ -9,9 +14,11 @@ import {
 
 const initialState = {
     friends: [],
+    singleFriend: [],
     error: '',
     isFetching: false,
-    isAdding: false
+    isAdding: false,
+    isGettingFriend: false
 }
 
 export const reducer = (state=initialState, action) => {
@@ -32,6 +39,29 @@ export const reducer = (state=initialState, action) => {
                 ...state,
                 error: action.payload
         }
+
+        //Get friend by ID:
+        case FRIEND_BY_ID_START:
+            console.log("Getting friend by ID is starting!");
+            return {
+                ...state,
+                isGettingFriend: true
+            }
+        case FRIEND_BY_ID_SUCCESS:
+            console.log("Getting friend by is is successful!")
+            return {
+                ...state,
+                singleFriend: action.payload
+            }
+        case FRIEND_BY_ID_FAIL:
+            console.log("getting friend failed :(")
+            return {
+            ...state,
+            error: action.payload
+            }
+
+
+
         case ADD_FRIEND_START:
             console.log("adding friends is starting!")
             return {

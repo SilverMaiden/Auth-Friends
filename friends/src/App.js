@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Login from "./components/Login";
 import FriendsList from "./components/FriendsList";
+import SingleFriend from "./components/singleFriend";
+import {connect} from "react-redux";
 import {
     BrowserRouter as Router,
     Switch,
@@ -23,18 +25,24 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
-function App() {
+
+const mapStateToProps = state => ({
+    id: state.singleFriend.id
+})
+
+function App(props) {
   return (
     <Router>
         <div className="App">
         <br />
         <Switch>
             <Route path="/login" component={Login} />
-            <PrivateRoute path='/friendslist' component={FriendsList} />
+            <PrivateRoute exact path='/friendslist' component={FriendsList} />
+            <PrivateRoute exact path={`/friendsList/${props.id}`} component={SingleFriend} />
         </Switch>
          </div>
     </Router>
   );
 }
 
-export default App;
+export default connect(mapStateToProps, {})(App);

@@ -20,7 +20,7 @@ const FriendsList = (props) => {
         props.getFriends();
 
 
-    }, [props.friends])
+    }, [])
 
     return (
         <>
