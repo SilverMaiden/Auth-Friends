@@ -5,7 +5,6 @@ import FriendForm from './FriendForm';
 import {axiosWithAuth} from '../axiosAuth';
 import {getFriends} from '../actions/index';
 import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
 
 const mapStateToProps = state => ({
     friends: state.friends
@@ -21,7 +20,7 @@ const FriendsList = (props) => {
         props.getFriends();
 
 
-    }, [])
+    }, [props.friends])
 
     return (
         <>
@@ -30,7 +29,7 @@ const FriendsList = (props) => {
                 <Friend friend={friend} />
             ))}
             <FriendForm />
-           <Link to="/login"> <Logout /></Link>
+            <Logout />
         </>
     )
 }

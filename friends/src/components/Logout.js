@@ -12,7 +12,7 @@ const Logout = (props) => {
 
     return (
 
-        <button onClick={logout}><Link to='/login'> Logout </Link></button>
+        <button onClick={logout}> Logout</button>
     )
 }
 export default Logout;

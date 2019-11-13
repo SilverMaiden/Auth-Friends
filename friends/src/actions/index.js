@@ -7,7 +7,7 @@ export const FETCH_FRIENDS_FAIL = 'FETCH_FRIENDS_FAIL';
 
 export const ADD_FRIEND_START = 'ADD_FRIEND_START';
 export const ADD_FRIEND_SUCCESS = 'ADD_FRIEND_SUCCESS';
-export const ADD_FRIEND_FAIL = 'ADD_FRIEND_FAIL'
+export const ADD_FRIEND_FAIL = 'ADD_FRIEND_FAIL';
 
 
 export const getFriends = () => dispatch => {
@@ -21,15 +21,15 @@ export const getFriends = () => dispatch => {
 }
 
 export const addFriend = (name, age, email) => dispatch => {
-    dispatch({type: ADD_FRIENDS_START});
+    dispatch({type: ADD_FRIEND_START});
     axiosWithAuth()
-        .post('https://localhost:5000/api/friends', {
+        .post('http://localhost:5000/api/friends/', {
             name,
             age,
-            height,
+            email,
             id: 0
         }).then(response => {
-               dispatch({type: ADD_FRIEND_SUCCESS}, payload: response)
+               dispatch({type: ADD_FRIEND_SUCCESS, payload: response})
         }).catch(err => {
             dispatch({type:ADD_FRIEND_FAIL, payload: err})
         })
