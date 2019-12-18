@@ -21,9 +21,9 @@ const Friend = (props) => {
                         <p> Name: {props.friend.name}</p>
                         <p> Age: {props.friend.age}</p>
                         <p> Email: {props.friend.email}</p>
-                        <Link to={`/friendsList/${props.friend.id}`}><button onClick={() => {
+                        {!props.single ?  <Link to={`/friendsList/${props.friend.id}`}><button onClick={() => {
                                 localStorage.setItem('singleFriendId', props.friend )
-                                }}> Learn More</button></Link>
+                                }}> Learn More</button></Link> : <> </>}
                     </span>
 
             <br />

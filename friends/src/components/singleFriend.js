@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Link} from 'react-router-dom'
 import {editFriendById, getFriendById} from '../actions/index';
 import FriendForm from '../components/FriendForm';
+import Friend from './Friend';
 import axiosWithAuth from '../axiosAuth';
 
 const mapStateToProps = state => ({
@@ -30,9 +31,7 @@ const SingleFriend = (props) => {
     return (
         <>
         <h1> Hi </h1>
-            <p> {props.friend.name}</p>
-            <p> {props.friend.age}</p>
-            <p> {props.friend.email}</p>
+            <Friend friend={props.friend} single={true}/>
             <FriendForm friendAction={props.editFriendById} friend={props.friend} buttonLabel={'Update'} />
             <Link to='/friendsList'><button> Return to friends list </button></Link>
         </>

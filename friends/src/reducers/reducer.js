@@ -14,6 +14,10 @@ import {
     ADD_FRIEND_START,
     ADD_FRIEND_SUCCESS,
     ADD_FRIEND_FAIL,
+
+    DELETE_FRIEND_START,
+    DELETE_FRIEND_SUCCESS,
+    DELETE_FRIEND_FAIL,
 } from '../actions/index';
 
 const initialState = {
@@ -22,6 +26,7 @@ const initialState = {
     error: '',
     isFetching: false,
     isAdding: false,
+    isDeleting: false,
     isGettingFriend: false,
     isEditing: false
 }
@@ -110,6 +115,26 @@ export const reducer = (state=initialState, action) => {
                 error: action.payload
         }
 
+        case DELETE_FRIEND_START:
+            console.log("Deleting friend has started...");
+            return {
+                ...state,
+                isDeleting: true,
+            }
+
+        case DELETE_FRIEND_SUCCESS:
+            console.log("Delete friend was successful");
+            return {
+                ...state,
+                isDeleting: false,
+            }
+
+        case DELETE_FRIEND_FAIL:
+            console.log("Delete friend was not successful");
+            return {
+                ...state,
+                error: action.payload,
+            }
         default:
             return state
     }

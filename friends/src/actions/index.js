@@ -9,6 +9,11 @@ export const ADD_FRIEND_START = 'ADD_FRIEND_START';
 export const ADD_FRIEND_SUCCESS = 'ADD_FRIEND_SUCCESS';
 export const ADD_FRIEND_FAIL = 'ADD_FRIEND_FAIL';
 
+export const DELETE_FRIEND_START = 'DELETE_FRIEND_START';
+export const DELETE_FRIEND_SUCCESS = 'DELETE_FRIEND_SUCCESS';
+export const DELETE_FRIEND_FAIL = 'DELETE_FRIEND_FAIL';
+
+
 export const FRIEND_BY_ID_START = 'FRIEND_BY_ID_START';
 export const FRIEND_BY_ID_SUCCESS = 'FRIEND_BY_ID_SUCCESS';
 export const FRIEND_BY_ID_FAIL = 'FRIEND_BY_ID_FAIl';
@@ -78,5 +83,17 @@ export const addFriend = (friend) => dispatch => {
                dispatch({type: ADD_FRIEND_SUCCESS, payload: response.data})
         }).catch(err => {
             dispatch({type:ADD_FRIEND_FAIL, payload: err})
+        })
+}
+
+export const deleteFriend = (id) => dispatch => {
+    dispatch({type: DELETE_FRIEND_START});
+    axiosWithAuth()
+        .delete(`http://localhost:5000/api/friends/${id}`,{
+        }).then(response => {
+            console.log(response)
+               dispatch({type: DELETE_FRIEND_SUCCESS, payload: response.data})
+        }).catch(err => {
+            dispatch({type:DELETE_FRIEND_FAIL, payload: err})
         })
 }
