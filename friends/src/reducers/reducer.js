@@ -7,6 +7,10 @@ import {
     FRIEND_BY_ID_SUCCESS,
     FRIEND_BY_ID_FAIL,
 
+    EDIT_FRIEND_START,
+    EDIT_FRIEND_SUCCESS,
+    EDIT_FRIEND_FAIL,
+
     ADD_FRIEND_START,
     ADD_FRIEND_SUCCESS,
     ADD_FRIEND_FAIL,
@@ -18,7 +22,8 @@ const initialState = {
     error: '',
     isFetching: false,
     isAdding: false,
-    isGettingFriend: false
+    isGettingFriend: false,
+    isEditing: false
 }
 
 export const reducer = (state=initialState, action) => {
@@ -30,9 +35,11 @@ export const reducer = (state=initialState, action) => {
                 isFetching: true
             }
         case FETCH_FRIENDS_SUCCESS:
+            console.log("Fetching friends is successful");
             return {
                 ...state,
-                friends: action.payload
+                friends: action.payload,
+                isFetching: false
         }
         case FETCH_FRIENDS_FAIL:
             return {
@@ -49,9 +56,11 @@ export const reducer = (state=initialState, action) => {
             }
         case FRIEND_BY_ID_SUCCESS:
             console.log("Getting friend by is is successful!")
+            console.log(action.payload);
             return {
                 ...state,
-                singleFriend: action.payload
+                singleFriend: action.payload,
+                isGettingFriend: false
             }
         case FRIEND_BY_ID_FAIL:
             console.log("getting friend failed :(")
@@ -60,6 +69,24 @@ export const reducer = (state=initialState, action) => {
             error: action.payload
             }
 
+        case EDIT_FRIEND_START:
+            console.log('EDIT HAS STARTED!')
+            return {
+                ...state,
+                isEditing: true
+        }
+
+        case EDIT_FRIEND_SUCCESS:
+            console.log("YAY, EDIT SUCCESSFUL!")
+            return {
+                ...state,
+                singleFriend: action.payload
+        }
+        case EDIT_FRIEND_FAIL:
+            return {
+                ...state,
+                error: action.payload
+        }
 
 
         case ADD_FRIEND_START:

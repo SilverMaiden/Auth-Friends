@@ -3,8 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import Login from "./components/Login";
 import FriendsList from "./components/FriendsList";
+import PlannerPortfolio from './components/PlannerPortfolio';
+import './styles.css';
 import SingleFriend from "./components/singleFriend";
-import {connect} from "react-redux";
 import {
     BrowserRouter as Router,
     Switch,
@@ -26,9 +27,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const mapStateToProps = state => ({
-    id: state.singleFriend.id
-})
 
 function App(props) {
   return (
@@ -38,11 +36,11 @@ function App(props) {
         <Switch>
             <Route path="/login" component={Login} />
             <PrivateRoute exact path='/friendslist' component={FriendsList} />
-            <PrivateRoute exact path={`/friendsList/${props.id}`} component={SingleFriend} />
+            <PrivateRoute exact path={`/friendsList/:id`} component={SingleFriend} />
         </Switch>
          </div>
     </Router>
   );
 }
 
-export default connect(mapStateToProps, {})(App);
+export default App;

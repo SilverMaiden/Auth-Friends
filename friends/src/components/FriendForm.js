@@ -1,19 +1,47 @@
-import React, {useState} from "react";
-import {addFriend} from '../actions/index';
+import React, {useState, useEffect} from "react";
 import {connect} from 'react-redux';
 
+
+const mapStateToProps = state => ({
+    singleFriend: state.singleFriend
+
+});
+
 const FriendForm = (props) => {
+    const url = window.location.pathname;
+    const id = url.substring(url.lastIndexOf('/') + 1);
+
     const [friend, setFriend] = useState({
-        name:'',
-        age: '',
-        email: '',
+        name: "",
+        age: "",
+        email: "",
+        id: 0,
     })
+
+
+    useEffect(() => {
+    if (props.friend) {
+        setFriend({
+            name: props.friend.name,
+            age: props.friend.age,
+            email: props.friend.email,
+            id: id,
+        })
+
+    }
+
+
+    }, [])
 
     const handleChange = event => {
         event.preventDefault();
         setFriend({...friend, [event.target.name]: event.target.value})
+        console.log(friend);
     }
 
+    const handleClick = event => {
+        props.friendAction(friend);
+    }
 
 
     return (
@@ -38,9 +66,10 @@ const FriendForm = (props) => {
                 onChange={handleChange}
             />
 
-            <button onClick={() => {
-                props.addFriend(friend.name, friend.age, friend.email)
-            }}>Add Friend</button>
+            {console.log(props.singleFriend)}
+            <button onClick={handleClick}>
+                {props.buttonLabel} Friend
+            </button>
         </form>
 
 
@@ -51,4 +80,4 @@ const FriendForm = (props) => {
     )
 }
 
-export default connect(null, {addFriend})(FriendForm);
+export default connect(mapStateToProps, {})(FriendForm);

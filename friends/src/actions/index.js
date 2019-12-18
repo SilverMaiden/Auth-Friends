@@ -15,6 +15,8 @@ export const FRIEND_BY_ID_FAIL = 'FRIEND_BY_ID_FAIl';
 
 //later
 export const EDIT_FRIEND_START = 'EDIT_FRIEND_START';
+export const EDIT_FRIEND_SUCCESS = 'EDIT_FRIEND_SUCCESS';
+export const EDIT_FRIEND_FAIL = 'EDIT_FRIEND_FAIL';
 
 
 export const getFriends = () => dispatch => {
@@ -31,16 +33,36 @@ export const getFriends = () => dispatch => {
 
 
 export const getFriendById = (id) => dispatch => {
+    console.log("HELLO")
     dispatch({type: FRIEND_BY_ID_START});
-    console.log("WOOT");
     axiosWithAuth()
         .get(`http://localhost:5000/api/friends/${id}`)
         .then(response => {
+            console.log(response.data)
             dispatch({type: FRIEND_BY_ID_SUCCESS, payload:response.data})
         })
         .catch(err => dispatch({type: FRIEND_BY_ID_FAIL, payload: err}))
 }
 
+// Edit friend by id
+
+export const editFriendById = (friendUpdate) => dispatch => {
+    dispatch({type: EDIT_FRIEND_START});
+    axiosWithAuth()
+        .put(`http://localhost:5000/api/friends/${friendUpdate.id}`, {
+            name: friendUpdate.name,
+            age: friendUpdate.age,
+            email:friendUpdate.email,
+            id: friendUpdate.id
+
+        }).then(response => {
+            dispatch({type: EDIT_FRIEND_SUCCESS, payload: response})
+        }).catch(err => {
+            dispatch({type: EDIT_FRIEND_FAIL, payload: err})
+        })
+}
+
+//Add a new friend
 
 export const addFriend = (name, age, email) => dispatch => {
     dispatch({type: ADD_FRIEND_START});
