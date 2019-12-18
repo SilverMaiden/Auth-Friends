@@ -97,6 +97,7 @@ export const reducer = (state=initialState, action) => {
         }
         case ADD_FRIEND_SUCCESS:
             console.log("adding friends was successful!")
+            console.log(action.payload)
             return {
                 ...state,
                 isAdding: false

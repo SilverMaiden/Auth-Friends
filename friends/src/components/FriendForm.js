@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 
 
 const mapStateToProps = state => ({
-    singleFriend: state.singleFriend
+    singleFriend: state.singleFriend,
+    friends: state.friends
 
 });
 
@@ -20,33 +21,45 @@ const FriendForm = (props) => {
 
 
     useEffect(() => {
-    if (props.friend) {
-        setFriend({
-            name: props.friend.name,
-            age: props.friend.age,
-            email: props.friend.email,
-            id: id,
-        })
+        if (props.friends.length > 1) {
+            console.log(props.friends.length)
+            let newId = props.friends.length + 1;
+            setFriend({
+                id: newId
+            })
+        }
 
-    }
+        if (props.friend) {
+            console.log(props.friend.id)
+            setFriend({
+                name: props.friend.name,
+                age: props.friend.age,
+                email: props.friend.email,
+                id: id,
+            })
+        }
+    }, [props.friends])
 
-
-    }, [])
 
     const handleChange = event => {
         event.preventDefault();
         setFriend({...friend, [event.target.name]: event.target.value})
-        console.log(friend);
     }
 
     const handleClick = event => {
         props.friendAction(friend);
+        setFriend({
+            name: "",
+            age: "",
+            email: "",
+            id: props.friends.length + 1,
+        })
     }
 
 
     return (
-        <div>
-        <form >
+        <div className="friend-container">
+        <form className="form">
             <input
                 type="text"
                 name="name"
@@ -66,7 +79,6 @@ const FriendForm = (props) => {
                 onChange={handleChange}
             />
 
-            {console.log(props.singleFriend)}
             <button onClick={handleClick}>
                 {props.buttonLabel} Friend
             </button>

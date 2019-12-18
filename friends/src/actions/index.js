@@ -53,7 +53,7 @@ export const editFriendById = (friendUpdate) => dispatch => {
             name: friendUpdate.name,
             age: friendUpdate.age,
             email:friendUpdate.email,
-            id: friendUpdate.id
+            id: parseInt(friendUpdate.id)
 
         }).then(response => {
             dispatch({type: EDIT_FRIEND_SUCCESS, payload: response})
@@ -64,16 +64,18 @@ export const editFriendById = (friendUpdate) => dispatch => {
 
 //Add a new friend
 
-export const addFriend = (name, age, email) => dispatch => {
+export const addFriend = (friend) => dispatch => {
     dispatch({type: ADD_FRIEND_START});
+    console.log(friend)
     axiosWithAuth()
-        .post('http://localhost:5000/api/friends/', {
-            name,
-            age,
-            email,
-            id: 0
+        .post('http://localhost:5000/api/friends/',{
+            name: friend.name,
+            age: parseInt(friend.age),
+            email: friend.email,
+            id: friend.id
         }).then(response => {
-               dispatch({type: ADD_FRIEND_SUCCESS, payload: response})
+            console.log(response)
+               dispatch({type: ADD_FRIEND_SUCCESS, payload: response.data})
         }).catch(err => {
             dispatch({type:ADD_FRIEND_FAIL, payload: err})
         })

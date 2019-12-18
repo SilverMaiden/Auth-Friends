@@ -25,7 +25,6 @@ const SingleFriend = (props) => {
 
     useEffect(() => {
         props.getFriendById(id);
-        console.log(props.friend)
     }, []);
 
     return (

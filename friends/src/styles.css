@@ -17,3 +17,18 @@
     padding-left: 5%;
     padding-right: 5%;
 }
+
+.form {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    border: solid black 2px;
+    width: 30%;
+    padding: 2%;
+    border-radius: 25px;
+}
+
+.form input {
+    border-radius: 25px;
+    margin: 3%;
+}
