@@ -17,6 +17,10 @@
     padding-left: 5%;
     padding-right: 5%;
 }
+.friend input {
+    border-radius: 25px;
+    margin: 3%;
+}
 
 .form {
     display: flex;

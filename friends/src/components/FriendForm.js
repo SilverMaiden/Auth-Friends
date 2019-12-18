@@ -59,7 +59,7 @@ const FriendForm = (props) => {
 
     return (
         <div className="friend-container">
-        <form className="form">
+        <form className="friend">
             <input
                 type="text"
                 name="name"
@@ -78,6 +78,7 @@ const FriendForm = (props) => {
                 placeholder="email"
                 onChange={handleChange}
             />
+            <br />
 
             <button onClick={handleClick}>
                 {props.buttonLabel} Friend

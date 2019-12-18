@@ -7,7 +7,9 @@ import Friend from './Friend';
 import axiosWithAuth from '../axiosAuth';
 
 const mapStateToProps = state => ({
-    friend: state.singleFriend
+    friend: state.singleFriend,
+    isEditing: state.isEditing,
+    isGettingFriend: state.isGettingFriend,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -30,11 +32,14 @@ const SingleFriend = (props) => {
 
     return (
         <>
-        <h1> Hi </h1>
+        {!props.isGettingFriend || !props.isGettingFriend ?
+        <>
             <Friend friend={props.friend} single={true}/>
             <FriendForm friendAction={props.editFriendById} friend={props.friend} buttonLabel={'Update'} />
-            <Link to='/friendsList'><button> Return to friends list </button></Link>
         </>
+            : <p>Loading Friend...</p>}
+            <Link to='/friendsList'><button> Return to friends list </button></Link>
+            </>
     )
 }
 

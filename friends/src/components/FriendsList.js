@@ -7,7 +7,11 @@ import {getFriends, addFriend} from '../actions/index';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => ({
-    friends: state.friends
+    friends: state.friends,
+    isFetching: state.isFetching,
+    isAdding: state.isAdding,
+    isDeleting: state.isDeleting,
+    isEditing: state.isEditing,
 })
 
 const mapDispatchToProps = {
@@ -16,10 +20,6 @@ const mapDispatchToProps = {
 }
 
 const FriendsList = (props) => {
-    useEffect(() => {
-        props.getFriends();
-    }, [])
-
     return (
         <>
             <h1> Hello I'm the friends list </h1>

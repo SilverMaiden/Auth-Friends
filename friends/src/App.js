@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Login from "./components/Login";
-import FriendsList from "./components/FriendsList";
+import Landing from "./components/Landing";
 import PlannerPortfolio from './components/PlannerPortfolio';
 import './styles.css';
 import SingleFriend from "./components/singleFriend";
@@ -35,7 +35,7 @@ function App(props) {
         <br />
         <Switch>
             <Route path="/login" component={Login} />
-            <PrivateRoute exact path='/friendslist' component={FriendsList} />
+            <PrivateRoute exact path='/friendslist' component={Landing} />
             <PrivateRoute exact path={`/friendsList/:id`} component={SingleFriend} />
         </Switch>
          </div>
